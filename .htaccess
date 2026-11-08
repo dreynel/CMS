@@ -1,0 +1,61 @@
+# ==========================================================
+# ISAT U Coffee Shop POS & Online Reservation System
+# Native PHP Apache Configuration for Hostinger & Localhost
+# ==========================================================
+
+# Prevent directory browsing
+Options -Indexes
+
+# Set default landing page
+DirectoryIndex index.php booking.php index.html
+
+# Set UTF-8 charset
+# Set UTF-8 charset & explicit MIME types for CSS/JS on Hostinger LiteSpeed
+AddDefaultCharset UTF-8
+<IfModule mod_mime.c>
+    AddType text/css .css
+    AddType application/javascript .js
+    AddType image/svg+xml .svg
+</IfModule>
+
+# Compression for static assets
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# Enable rewrite engine for clean URLs (/admin, /login, /booking, /pos, /kitchen, /scanner)
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Pass Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Prevent access to sensitive configuration files
+    RewriteRule ^config/ - [F,L]
+    RewriteRule \.(sql|env|json|lock|md|log)$ - [F,L]
+
+    # Always serve static assets directly without rewriting
+    RewriteRule ^assets/ - [L]
+
+    # Existing physical files & folders bypass rewrites
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Clean URL Route mappings
+    RewriteRule ^admin/?$ admin.php [L,QSA]
+    RewriteRule ^login/?$ login.php [L,QSA]
+    RewriteRule ^booking/?$ booking.php [L,QSA]
+    RewriteRule ^reservation/?$ booking.php [L,QSA]
+    RewriteRule ^pos/?$ pos.php [L,QSA]
+    RewriteRule ^kitchen/?$ kitchen.php [L,QSA]
+    RewriteRule ^barista/?$ kitchen.php [L,QSA]
+    RewriteRule ^scanner/?$ scanner.php [L,QSA]
+    RewriteRule ^concierge/?$ scanner.php [L,QSA]
+    RewriteRule ^pass/?$ pass.php [L,QSA]
+    RewriteRule ^receipt/?$ receipt.php [L,QSA]
+
+    # General virtual route fallback
+    RewriteRule ^([a-zA-Z0-9_-]+)/?$ index.php?page=$1 [L,QSA]
+</IfModule>

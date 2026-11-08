@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgRawGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBF8F5"/>
+      <stop offset="100%" stop-color="#EADDCB"/>
+    </linearGradient>
+    <filter id="rawShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#C37960" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+  <rect width="400" height="300" fill="url(#bgRawGrad)"/>
+  <g transform="translate(200, 125)" filter="url(#rawShadow)">
+    <!-- Base Shadow -->
+    <ellipse cx="0" cy="45" rx="50" ry="12" fill="#D5C5B5" opacity="0.6"/>
+    <!-- Outer Circle Badge -->
+    <circle cx="0" cy="0" r="42" fill="#C37960"/>
+    <!-- Packaging Box / Sack Icon -->
+    <path d="M-22 -14 L0 -24 L22 -14 L22 18 L0 28 L-22 18 Z" fill="#FFF6F6"/>
+    <!-- Box Lid / Flap Lines -->
+    <path d="M-22 -14 L0 -4 L22 -14 M0 -4 L0 28" stroke="#D5C5B5" stroke-width="2.5" fill="none"/>
+    <!-- Wheat / Ingredient Leaf Symbol -->
+    <path d="M-6 -10 Q0 -18 6 -10 Q0 -2 -6 -10 Z" fill="#894E3F"/>
+  </g>
+  <text x="200" y="225" font-family="'Plus Jakarta Sans', sans-serif" font-size="15" font-weight="700" fill="#894E3F" text-anchor="middle" letter-spacing="0.5">RAEDEN'S INVENTORY</text>
+  <text x="200" y="248" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="500" fill="#a66252" text-anchor="middle">Raw Material / Ingredient</text>
+</svg>

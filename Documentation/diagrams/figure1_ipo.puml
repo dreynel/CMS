@@ -1,0 +1,43 @@
+@startuml
+skinparam monochrome true
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 11
+
+package "INPUT" as InputPkg {
+  [Product Information and 2D QR Codes]
+  [Table and Study Pod Setup]
+  [Customer Reservation Details]
+  [Counter Sales and Orders]
+  [User Account Credentials]
+}
+
+package "PROCESS" as ProcessPkg {
+  [Manage User Accounts]
+  [Auto-Read Product QR Codes]
+  [Compute POS Cart and Discounts]
+  [Process Reservations and QR Passes]
+  [Kitchen Order Routing (KDS)]
+  [Deduct Inventory Stock and Reports]
+}
+
+package "OUTPUT" as OutputPkg {
+  [ISAT U Coffee Shop POS System]
+  [Fast QR Code POS Checkout]
+  [Printable Customer Receipts]
+  [Real-Time Kitchen Display (KDS)]
+  [Online Reservation with QR Pass]
+  [Sales and Inventory Reports]
+}
+
+package "FEEDBACK" as FeedbackPkg {
+  [System Evaluation (ISO 25010 Standards)]
+  [Functional Suitability, Usability, Performance]
+  [Reliability, Security, Maintainability, Portability]
+}
+
+InputPkg -right-> ProcessPkg
+ProcessPkg -right-> OutputPkg
+OutputPkg -down-> FeedbackPkg
+FeedbackPkg -left-> ProcessPkg
+FeedbackPkg -left-> InputPkg
+@enduml

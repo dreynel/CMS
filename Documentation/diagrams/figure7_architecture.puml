@@ -1,0 +1,29 @@
+@startuml
+skinparam monochrome true
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 11
+
+rectangle "Client Devices" {
+  [Customer Smartphones / Laptops (Online Reservation & QR Pass)] as CustomerDev
+  [Cashier Counter Desktop PC (POS Screen + Scanner + Printer)] as CashierDev
+  [Kitchen Screen / Tablet (Barista KDS Screen)] as KitchenDev
+}
+
+cloud "Campus Network (LAN / Wi-Fi)" as Net {
+  [Local Area Network HTTP Port 80] as LAN
+}
+
+rectangle "Host Web Server Machine" {
+  [Apache Web Server 2.4 and PHP 8.2 Engine] as WebServer
+  [Laravel Application Framework Core] as AppCore
+  database "MySQL 8.0 Community Server (db_isatu_pos)" as DB
+}
+
+CustomerDev --> LAN
+CashierDev --> LAN
+KitchenDev --> LAN
+
+LAN --> WebServer
+WebServer --> AppCore
+AppCore --> DB
+@enduml

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF6F6"/>
+      <stop offset="100%" stop-color="#EEE1BA"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bgGenGrad)"/>
+  <g transform="translate(200, 125)">
+    <circle cx="0" cy="0" r="38" fill="#894E3F" opacity="0.9"/>
+    <path d="M-16 12 L16 12 L16 -8 L-16 -8 Z M-12 -8 L-7 -15 L7 -15 L12 -8 Z" fill="#FFF6F6"/>
+    <circle cx="0" cy="2" r="6" fill="#894E3F"/>
+  </g>
+  <text x="200" y="215" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="700" fill="#894E3F" text-anchor="middle">RAEDEN'S</text>
+  <text x="200" y="235" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="500" fill="#a66252" text-anchor="middle">No Image Available</text>
+</svg>

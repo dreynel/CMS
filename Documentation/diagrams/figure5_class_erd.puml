@@ -1,0 +1,133 @@
+@startuml
+skinparam monochrome true
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 10
+hide circle
+
+class users {
+  + id : int [PK]
+  --
+  name : varchar
+  email : varchar
+  password : varchar
+  role : enum
+  affiliation : enum
+  id_number : varchar
+  phone : varchar
+}
+
+class categories {
+  + id : int [PK]
+  --
+  name : varchar
+  slug : varchar
+}
+
+class products {
+  + id : int [PK]
+  --
+  category_id : int [FK]
+  product_code : varchar [Unique]
+  name : varchar
+  price : decimal
+  cost_price : decimal
+  stock_quantity : int
+  min_stock_alert : int
+}
+
+class product_sizes {
+  + id : int [PK]
+  --
+  product_id : int [FK]
+  size_name : varchar
+  price_additional : decimal
+}
+
+class product_addons {
+  + id : int [PK]
+  --
+  product_id : int [FK]
+  addon_name : varchar
+  price : decimal
+}
+
+class dining_tables {
+  + id : int [PK]
+  --
+  table_code : varchar
+  name : varchar
+  zone : varchar
+  capacity : int
+  status : enum
+}
+
+class reservations {
+  + id : int [PK]
+  --
+  reservation_number : varchar
+  qr_token : varchar
+  table_id : int [FK]
+  customer_name : varchar
+  reservation_date : date
+  time_slot : varchar
+  guest_count : int
+  status : varchar
+}
+
+class reservation_items {
+  + id : int [PK]
+  --
+  reservation_id : int [FK]
+  product_id : int [FK]
+  size_name : varchar
+  quantity : int
+  subtotal : decimal
+}
+
+class orders {
+  + id : int [PK]
+  --
+  order_number : varchar
+  reservation_id : int [FK]
+  cashier_id : int [FK]
+  order_type : varchar
+  subtotal : decimal
+  discount_amount : decimal
+  vat_amount : decimal
+  net_total : decimal
+  payment_method : varchar
+  status : varchar
+}
+
+class order_items {
+  + id : int [PK]
+  --
+  order_id : int [FK]
+  product_id : int [FK]
+  size_name : varchar
+  quantity : int
+  unit_price : decimal
+  subtotal : decimal
+}
+
+class payments {
+  + id : int [PK]
+  --
+  order_id : int [FK]
+  amount_paid : decimal
+  change_amount : decimal
+  payment_method : varchar
+}
+
+categories "1" -- "*" products
+products "1" -- "*" product_sizes
+products "1" -- "*" product_addons
+dining_tables "1" -- "*" reservations
+reservations "1" -- "*" reservation_items
+products "1" -- "*" reservation_items
+users "1" -- "*" orders : cashier
+reservations "0..1" -- "*" orders
+orders "1" -- "*" order_items
+products "1" -- "*" order_items
+orders "1" -- "1" payments
+@enduml

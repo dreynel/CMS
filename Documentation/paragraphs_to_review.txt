@@ -1,0 +1,117 @@
+=== PARAGRAPH [3] ===
+At Iloilo Science and Technology University - Dumangas Campus (ISAT U - DC) in Dumangas, Iloilo, there is an existing Mini Hotel. The school uses this hotel for campus guests, seminars, and student training. The university is now planning to open a new coffee shop and study lounge inside this mini hotel. This new coffee shop will sell coffee, cold drinks, and snacks to students, teachers, and visitors. It will also have tables and quiet study pods with power outlets where students can do their homework and charge their laptops.
+
+=== PARAGRAPH [4] ===
+To run the upcoming coffee shop efficiently, the operations are divided between two separate staff members: one person works as the cashier at the front counter, and another person works as the barista who prepares the beverages at the kitchen station. However, relying on manual pen-and-paper communication between the cashier and the barista creates serious operational bottlenecks. When the cashier writes orders on loose paper chits and carries or calls them out to the barista, slips can easily get wet, torn, stained by spilled milk, or lost on the prep table. During peak class breaks, verbal shouting and messy handwriting lead to order mix-ups, wrong cup sizes, forgotten modifiers, and delayed service.
+
+=== PARAGRAPH [5] ===
+To prevent these problems before the coffee shop opens, the researchers created a computerized management system. Setting up a computerized system before opening makes sure the new coffee shop starts with a smooth, paperless, and organized way of working from day one.
+
+=== PARAGRAPH [6] ===
+The researchers developed the ISAT U - DC Coffee Shop POS System with Online Reservation and QR Code. The system provides dedicated interfaces for each separate user. Customers can visit the website to view seat layouts, reserve study pods with power outlets, select pre-ordered beverages and snacks, agree to the mandatory 15-minute seating reservation policy, and manage their booking through a dynamic QR booking pass. At the service counter, the staff concierge verifies guest arrival and seating assignments through QR scanning, while the cashier uses the touch POS terminal to scan the customer's QR pass—instantly auto-fetching the pre-ordered items into the sales cart for review, optional editing, and payment processing—as well as scanning printed product QR code tags for walk-in items, verifying packaging availability, applying statutory discounts, and issuing thermal sales receipts. At the beverage preparation area, the barista uses a digital Kitchen Display System (KDS) screen to view confirmed POS orders alongside each item's exact base recipe ingredients, selected add-ons, and required cups, straws, and takeout boxes—atomically deducting raw ingredients and packaging from the perpetual inventory ledger upon brewing and serving. The system also gives administrators a perpetual inventory suite with datalist-validated Stock In/Out vouchers, item conversions, recipe and add-on configuration, printable menu QR code tag sheets, and sales audit dashboards.
+
+=== PARAGRAPH [7] ===
+By using this system, the upcoming coffee shop inside the ISAT U - DC Mini Hotel will have an easy and organized way to serve customers, coordinate orders between the cashier and barista seamlessly, manage study pods, and track sales, recipes, packaging, and raw ingredient inventory without using loose paper slips.
+
+=== PARAGRAPH [9] ===
+The main objective of the study was to develop and evaluate a Point of Sale (POS) and online reservation system with QR code for the upcoming coffee shop inside the ISAT U - Dumangas Campus Mini Hotel.
+
+=== PARAGRAPH [20] ===
+As shown in Figure 1, the framework illustrates the systematic flow of information through the system for the upcoming coffee shop inside the ISAT U - DC Mini Hotel. The input stage encompasses the baseline data required to initialize and operate the coffee shop: user account credentials for authorized system personnel (Administrator, Cashier, and Barista), with customers accessing the public reservation portal directly without account registration; product catalog data incorporating two-dimensional (2D) Quick Response (QR) codes for product classification along with selling prices and beverage modifiers; the number of tables and chairs (including dining tables, chairs, and quiet study pods inside the mini hotel); online reservation bookings with agreed 15-minute seating holding terms; and financial transaction parameters (cash tender, GCash references, and discount credentials).
+
+=== PARAGRAPH [24] ===
+The output stage yields the fully operational ISAT U - DC Coffee Shop POS System with Online Reservation and QR Code. Below the primary processing pipeline, the system's evaluation stage incorporates the ISO/IEC 25010 software product quality standards as a solid feedback loop, providing empirical quality metrics to guide continuous refinement and maintenance of system inputs and operational processes.
+
+=== PARAGRAPH [27] ===
+The scope of the study focuses on the design, development, and evaluation of an integrated web-based Point of Sale (POS) and online reservation system engineered specifically for the upcoming coffee shop and study lounge situated inside the ISAT U - Dumangas Campus Mini Hotel in Dumangas, Iloilo. The software encompasses four interconnected functional modules tailored to distinct user roles: an online reservation and pre-ordering portal for customers, a touch-enabled front-counter POS terminal for the cashier, a dark-mode Kitchen Display System (KDS) for the barista, and an administrative control panel for campus supervisors.
+
+=== PARAGRAPH [28] ===
+The customer portal enables students, faculty, and mini hotel guests to inspect real-time seating availability across designated zones (Lounge, Study Hub, Main Hall, and Terrace), book a study pod or dining table, pre-order customized beverages with specific sweetness and ice modifiers, and receive an encrypted dynamic QR pass for seamless check-in. The front-counter cashier module features optical 2D QR code auto-reading for rapid product classification, cup size and modifier adjustments, statutory discount computation (comprising a 10% discount for ISAT U students and faculty members and a 20% statutory discount for senior citizens and persons with disabilities [PWD]), cash tender and GCash payment recording, thermal receipt generation, and rapid customer QR pass validation. The kitchen operations module provides a dedicated real-time KDS screen with acoustic chimes for beverage and food preparation tracking, and triggers Brew-to-Serve inventory deductions. The administrative module provides user account management, product pricing and recipe configuration, printable menu QR code generation, perpetual inventory tracking, and daily sales auditing.
+
+=== PARAGRAPH [30] ===
+The operational scope of the ISAT U - DC Coffee Shop POS System is subject to several practical limitations. First, while the system provides structured recording of digital payments, it does not interface directly with commercial credit card banking gateways; cashless payments conducted via digital wallets such as GCash require manual verification of reference numbers by the counter cashier. Additionally, the system operates as a responsive web-based platform accessible through standard mobile and desktop browsers rather than a native downloadable mobile application, and all booking passes and transactional notifications are delivered digitally through the web portal without automated cellular SMS transmission.
+
+=== PARAGRAPH [31] ===
+Furthermore, the software is engineered exclusively for on-campus dining, study pod reservations, and counter takeout within the coffee shop and study lounge situated inside the ISAT U - Dumangas Campus Mini Hotel, and does not integrate with external third-party food delivery services or broader multi-branch hotel management infrastructures. Physical access to study pods and reserved tables relies on visual check-in and staff concierge verification rather than automated electronic door latch mechanisms. Finally, system availability depends upon the active campus local area network and continuous institutional electrical power; severe network interruptions or power outages impair real-time portal access until network connectivity is restored.
+
+=== PARAGRAPH [34] ===
+Customer (Students, Faculty, and Mini Hotel Guests). The system provides a self-service web interface to inspect real-time table and study pod availability, reserve study spaces with power outlets, customize beverage pre-orders, and present a digital QR pass for rapid counter check-in without waiting in congested physical queues.
+
+=== PARAGRAPH [37] ===
+Administrator (Campus Management and Supervisors). The system provides centralized oversight of user role credentials, product pricing, printable menu QR codes, perpetual inventory balances with automated Brew-to-Serve deduction, and daily sales auditing to support institutional accountability.
+
+=== PARAGRAPH [42] ===
+Brew-to-Serve Inventory Deduction. A perpetual inventory control technique where raw materials and packaging supplies are deducted from stock only when finished products are physically produced and dispensed. An automated system routine executed in the ISAT U system when the barista advances an order from Brewing to Ready/Served, decrementing exact recipe ingredient quantities, cups, straws, and takeout boxes in the database without stock trapping at the POS checkout counter.
+
+=== PARAGRAPH [46] ===
+Online Reservation Portal. A web-based booking system allowing remote users to schedule resource allocation and reserve facilities in advance. The customer-facing web application of the ISAT U coffee shop where users inspect real-time seating availability across four zones, book study pods or dining tables, and select beverage pre-orders.
+
+=== PARAGRAPH [49] ===
+Study Pod. A semi-private, acoustically buffered individual workspace furnished with electrical outlets and seating for focused academic activity. A designated bookable seating unit within the Study Hub and Lounge zones of the ISAT U Mini Hotel, tracked in the database by unique identifiers, electrical availability, and reservation time slots.
+
+=== PARAGRAPH [70] ===
+Vega & Generoso (2021) — Campus Facility Scheduling
+
+=== PARAGRAPH [71] ===
+Vega and Generoso (2021), published in the Asia Pacific Journal of Academic Research in Business Administration, investigated the transition of campus facility scheduling from paper logbooks to an automated web platform at Lyceum of the Philippines University - Batangas. Their empirical findings demonstrated that manual booking caused frequent scheduling collisions and poor administrative visibility, whereas web-based booking eliminated double-bookings and significantly enhanced space utilization across campus facilities. Their study directly informs the study pod and table reservation architecture of the ISAT U system.
+
+=== PARAGRAPH [76] ===
+Capuyan et al. (2022) — Automated Online Reservation for Campus Hospitality
+
+=== PARAGRAPH [77] ===
+Capuyan et al. (2022), published in the International Journal of Advanced Research in Computer Science, designed and evaluated an automated online reservation system for the Cebu Technological University (CTU) Danao Campus Facility Centrum using the Technology Acceptance Model (TAM). Their findings showed that digital reservation management received exceptional acceptance scores from university administrators and guests, eliminating scheduling confusion and providing transparent auditing of hospitality facility usage. Their work reinforces the mini hotel integration implemented in the present study.
+
+=== PARAGRAPH [86] ===
+Table 1 shows the comparison between previous related studies and the proposed ISAT U - DC Coffee Shop POS System with Online Reservation and QR Code in terms of key system capabilities. Check marks (✔) indicate the presence of a feature, while cross marks (✖) indicate its absence.
+
+=== PARAGRAPH [91] ===
+A rigorous analysis of the reviewed literature and empirical studies reveals a distinct research and operational gap in existing campus commercial platforms. Previous investigations have typically addressed commercial point of sale, facility scheduling, and kitchen management in isolation. Traditional campus retail systems either focus purely on front-counter sales without reservation capabilities, manage room bookings without food and beverage ordering, or lack digital kitchen display coordination. Furthermore, conventional retail POS software enforces counter-level stock trapping, erroneously assuming that finished drinks are pre-manufactured stock units rather than made-to-order artisanal beverages requiring recipe-based preparation. Prior to this research, no documented platform integrated space reservation for quiet study pods with power outlets, optical 2D QR product classification, paperless kitchen queue dispatching, and perpetual recipe-based stock control within a unified campus mini hotel environment.
+
+=== PARAGRAPH [92] ===
+Methodologically and architecturally, the proposed ISAT U - DC Coffee Shop POS System diverges significantly from previous works. While earlier studies often relied on rigid waterfall models or generic third-party commercial software, this study employs the Prototyping Software Development Life Cycle (SDLC) Model. This iterative methodology enabled continuous design refinement based on hands-on evaluations by university administrators, auxiliary staff, and prospective student patrons. Architecturally, the system decouples sales recording from inventory depletion through an automated 'Brew-to-Serve' mechanism. Frontline cashiers record orders, compute statutory discounts (10% student/faculty and 20% senior/PWD), and issue thermal receipts without altering ingredient balances; raw materials, packaging cups, straws, and takeout boxes are deducted only when the barista physically prepares and serves the order on the KDS screen. Additionally, the system leverages ISO/IEC 18004 2D QR matrix symbology in a unified dual capacity—generating printable menu QR tags for instantaneous cashier cart auto-reading, and issuing encrypted, dynamic QR passes on customer smartphones for rapid concierge check-in and scheduled pre-order dispatch.
+
+=== PARAGRAPH [93] ===
+The primary contribution of this study is the delivery of a customized, cost-effective, and empirically validated operational management prototype developed from the ground up for the upcoming coffee shop inside the ISAT U - Dumangas Campus Mini Hotel. By synthesizing online facility booking, optical QR item scanning, acoustic kitchen signaling, and perpetual ingredient tracking into a responsive Native PHP and MySQL architecture, the system provides a dependable institutional blueprint for university auxiliary enterprises, demonstrating that modern web technologies and 2D matrix symbology can elevate operational efficiency, prevent inventory wastage, and enhance the academic hospitality experience.
+
+=== PARAGRAPH [97] ===
+The ISAT U - DC Coffee Shop POS System with Online Reservation and QR Code is an integrated, web-based management platform engineered from the ground up for the upcoming coffee shop and study lounge situated inside the ISAT U - Dumangas Campus Mini Hotel in Dumangas, Iloilo. The system serves as a unified operational bridge connecting front-of-house customer transactions, counter cashiering, kitchen beverage brewing, and back-office administrative oversight.
+
+=== PARAGRAPH [98] ===
+Through its responsive architecture, customers can access self-service seating reservations across four distinct hotel zones (Lounge, Study Hub, Main Hall, and Terrace), pre-order customized beverages with specific sweetness and ice modifiers, and obtain an encrypted dynamic QR pass for seamless check-in. At the service counter, the cashier operates a touch-enabled POS terminal paired with an optical 2D scanner to read product QR tags for instant classification, apply statutory student, faculty, senior, and PWD discounts, record cash or GCash payments, and print thermal sales receipts. In the beverage preparation area, the barista utilizes a paperless Kitchen Display System (KDS) monitor with audio alert chimes to inspect recipe bills of materials and advance tickets through preparation stages, automatically triggering Brew-to-Serve inventory deductions upon drink fulfillment. Meanwhile, campus administrators utilize centralized dashboards to configure user accounts, adjust menu prices, generate printable product QR tags, monitor perpetual ingredient balances, and audit daily sales revenue.
+
+=== PARAGRAPH [100] ===
+To develop the system from the ground up for the upcoming campus enterprise, the researchers adopted the Prototyping Software Development Life Cycle (SDLC) Model. The Prototyping Model is an iterative software engineering methodology that constructs early functional versions of the system, subjects them to direct stakeholder evaluation, and refines system features through continuous feedback cycles until all operational specifications are fulfilled. This model is exceptionally well-suited for novel campus auxiliary enterprises where end-user requirements and physical workflow configurations evolve through direct operational testing. Figure 2 illustrates the Prototyping SDLC Model implemented in this study.
+
+=== PARAGRAPH [104] ===
+The researchers consulted with ISAT U - Dumangas Campus administrators, mini hotel supervisors, auxiliary service personnel, and prospective student patrons to establish operational requirements for the forthcoming coffee shop. Key requirements identified included the need for online reservation of tables and quiet study pods with electrical charging outlets, optical QR code product classification at the sales counter, paperless order coordination for the barista, statutory discounting (10% student/faculty and 20% senior/PWD), and perpetual inventory monitoring with low-stock alerts.
+
+=== PARAGRAPH [110] ===
+The prototype was demonstrated to prospective coffee shop cashiers, baristas, campus supervisors, and student evaluators at ISAT U - DC. Evaluators tested study pod bookings, placed walk-in and pre-orders, scanned product QR codes, processed payments, and updated kitchen tickets, providing critical qualitative feedback regarding usability and interface responsiveness.
+
+=== PARAGRAPH [116] ===
+The completed system was deployed on an institutional web and local area network server at ISAT U - Dumangas Campus. Operational manuals and training orientations were provided to counter cashiers and baristas. Formal software quality evaluation was conducted in accordance with the ISO/IEC 25010 international standard.
+
+=== PARAGRAPH [125] ===
+Figure 3. System Architecture Diagram of the ISAT U - DC Coffee Shop POS System
+
+=== PARAGRAPH [128] ===
+Figure 4a illustrates the Use Case Diagram for the Customer role within the Customer Portal subsystem. The Customer actor interacts with four primary use cases: View Available Tables & Menu (browsing current seating layouts, study pods, and item prices), Reserve Table or Study Pod (selecting desired seating and reservation time slots), Select Beverage Pre-Orders (choosing drinks, cup sizes, and optional modifiers), and Receive QR-Based Booking Pass (generating an encrypted dynamic QR pass for concierge validation).
+
+=== PARAGRAPH [142] ===
+Figure 5a illustrates the Activity Diagram for the Customer role. The workflow begins at the solid black Start circle, proceeding directly into the public Customer Booking Interface without requiring user login or account registration. From the portal interface, execution forks into parallel activities: browsing available dining tables and study pod seating layouts, reserving a desired seat or table, selecting and customizing beverage pre-orders, and agreeing to the mandatory 15-minute seating reservation policy. Upon agreement and submission, the system generates a dynamic QR booking pass with scheduled table assignment details. The customer presents this QR pass to the staff concierge for onsite seating check-in and to the cashier for POS order retrieval, before terminating cleanly at the bullseye final node.
+
+=== PARAGRAPH [157] ===
+2. Tables, Reservations, and Stock Ledger Subsystem: dining_tables (table and study pod codes, seating zones, power outlet availability, status), reservations (reservation numbers, unique qr_token hashes, time slots, check-in status), reservation_items (pre-ordered menu items and quantities), and inventory_ledger & txns (immutable audit trail of stock receipts, conversions, and Brew-to-Serve deductions).
+
+=== PARAGRAPH [187] ===
+To evaluate the technical quality, usability, and operational suitability of the ISAT U - DC Coffee Shop POS System with Online Reservation and QR Code, the researchers utilized the ISO/IEC 25010 software product quality standard. The evaluation examined eight quality characteristics: functional suitability, performance efficiency, compatibility, usability, reliability, security, maintainability, and portability.
+
+=== PARAGRAPH [194] ===
+A total of ten (10) respondents were selected using purposive sampling to evaluate the system. Purposive sampling ensured that evaluators possessed relevant technical expertise and familiarity with campus auxiliary services. The evaluators were categorized into two distinct panels:
+
+=== PARAGRAPH [195] ===
+1. IT Experts (5 respondents): Information Technology faculty members and software engineers from ISAT U - DC who rigorously evaluated system architectural design, database normalization, barcode auto-read responsiveness, security enforcement, and source code maintainability.
+
+=== PARAGRAPH [196] ===
+2. Domain End-Users (5 respondents): ISAT U - DC auxiliary services staff, prospective coffee shop cashiers, student assistants, and faculty and student patrons who evaluated interface usability, study pod reservation clarity, order customization, and overall operational readiness.
+

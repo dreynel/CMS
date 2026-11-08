@@ -1,0 +1,30 @@
+@startuml
+skinparam monochrome true
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 11
+
+start
+:Phase 1: Requirements Gathering
+(Interview coffee shop staff, observe counter and study pods);
+
+:Phase 2: Quick Design
+(Design database tables, screen layouts, QR code flow);
+
+:Phase 3: Prototype Development
+(Build initial web app using Native PHP, MySQL, and Bootstrap 5.3);
+
+repeat
+  :Phase 4: User Evaluation
+  (Demonstrate prototype to cashiers, baristas, and students);
+  :Phase 5: Refinement
+  (Improve QR code reading speed, fix button layout, add chimes);
+repeat while (More user adjustments needed?) is (yes)
+->no;
+
+:Phase 6: Testing
+(Test calculations, QR scanner, receipt printing, and browser display);
+
+:Phase 7: Deployment and Orientation
+(Install on campus computer, train cashiers and baristas);
+stop
+@enduml

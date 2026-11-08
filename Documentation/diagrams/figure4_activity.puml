@@ -1,0 +1,43 @@
+@startuml
+skinparam monochrome true
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 11
+
+start
+:Cashier logs in and opens POS terminal;
+:Select order type (Dine-In, Takeout, or Study Pod);
+
+if (How to add item?) then (Scan Product QR Code)
+  :Cashier scans product 2D QR with optical scanner;
+  :System reads product code automatically;
+  :System finds item in database;
+  :Item is added to cart tray instantly;
+else (Manual Touch)
+  :Cashier clicks category and item button;
+  :Item is added to cart tray;
+endif
+
+if (Is drink customizable?) then (yes)
+  :Select cup size (Regular, Large, Jumbo);
+  :Select sweetness level and ice level;
+  :Select extra add-ons (extra shot, pearls);
+else (no)
+endif
+
+:Select customer discount (None, Student/Faculty 10%, PWD 20%);
+:System calculates subtotal, discount, 12% VAT, and total;
+
+if (Payment Method?) then (Cash)
+  :Cashier enters cash tender;
+  :System calculates change;
+else (GCash)
+  :Cashier verifies reference number;
+endif
+
+:Click Complete Order;
+:System saves order to MySQL;
+:System reduces stock quantity;
+:Order sent to Barista Kitchen Screen (KDS);
+:Thermal printer generates 80mm receipt;
+stop
+@enduml

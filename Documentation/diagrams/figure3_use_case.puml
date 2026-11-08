@@ -1,0 +1,37 @@
+@startuml
+skinparam monochrome true
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 11
+skinparam packageStyle rectangle
+left to right direction
+
+actor "Customer\n(Student / Faculty)" as Customer
+actor "Cashier" as Cashier
+
+rectangle "ISAT U Coffee Shop POS and Reservation System" {
+  usecase "Browse Menu and Reserve Study Pod" as UC1
+  usecase "Receive Digital QR Pass" as UC2
+  usecase "Scan Product 2D QR Code and Checkout" as UC3
+  usecase "Verify Customer Reservation QR Pass" as UC4
+  usecase "View and Update Kitchen Orders (KDS)" as UC5
+  usecase "Manage Products, Prices, and Stock" as UC6
+  usecase "Manage Table and Study Pod Schedules" as UC7
+  usecase "View Sales Analytics and Daily Reports" as UC8
+}
+
+actor "Barista" as Barista
+actor "Administrator" as Admin
+
+Customer --> UC1
+Customer --> UC2
+
+Cashier --> UC3
+Cashier --> UC4
+
+UC5 <-- Barista
+
+UC6 <-- Admin
+UC7 <-- Admin
+UC8 <-- Admin
+
+@enduml

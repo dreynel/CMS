@@ -1,0 +1,27 @@
+@startuml
+skinparam monochrome true
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 11
+
+actor Cashier
+boundary "POS Web Screen" as POS
+control "Native PHP POS Controller" as Controller
+database "MySQL Database" as DB
+boundary "Kitchen Screen (KDS)" as KDS
+
+Cashier -> POS : Scans product 2D QR code
+POS -> Controller : Send scanned code (e.g. 'PROD-001')
+Controller -> DB : Find product by product_code
+DB --> Controller : Return name, price, stock
+Controller --> POS : Return item info (JSON)
+POS -> POS : Auto-add item to cart tray and update total
+
+Cashier -> POS : Selects payment (Cash) and clicks Complete Order
+POS -> Controller : Submit order payload
+Controller -> DB : Save order and order items
+Controller -> DB : Deduct stock from products table
+DB --> Controller : Confirm saved
+Controller -> KDS : Push order to kitchen queue
+Controller --> POS : Order complete confirmation
+POS -> POS : Show and print 80mm thermal receipt
+@enduml
