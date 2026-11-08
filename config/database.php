@@ -93,39 +93,43 @@ function getDB() {
     }
 
     $hostsToTry = array_unique([DB_HOST, 'localhost', '127.0.0.1']);
+    $usersToTry = array_unique([DB_USER, 'root']);
     $passwordsToTry = array_unique([DB_PASS, '']); // Try configured password first, then blank password for standard XAMPP
 
     foreach ($hostsToTry as $host) {
-        foreach ($passwordsToTry as $pass) {
-            try {
-                $dsn = "mysql:host=" . $host . ";port=" . DB_PORT . ";dbname=" . DB_NAME . ";charset=utf8mb4";
-                $options = [
-                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                    PDO::ATTR_EMULATE_PREPARES => false,
-                    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci",
-                ];
-                $pdo = new PDO($dsn, DB_USER, $pass, $options);
-                initDatabaseSession($pdo);
-                return $pdo;
-            } catch (PDOException $e) {
-                // If the database doesn't exist yet, attempt to create it (local environments)
-                if ($e->getCode() == 1049 || strpos($e->getMessage(), 'Unknown database') !== false) {
-                    try {
-                        $rootDsn = "mysql:host=" . $host . ";port=" . DB_PORT . ";charset=utf8mb4";
-                        $rootPdo = new PDO($rootDsn, DB_USER, $pass);
-                        $rootPdo->exec("CREATE DATABASE IF NOT EXISTS `" . DB_NAME . "` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;");
-                        
-                        // Reconnect to newly created database
-                        $pdo = new PDO($dsn, DB_USER, $pass, $options);
-                        initDatabaseSession($pdo);
-                        return $pdo;
-                    } catch (Exception $createEx) {
-                        // Fall through
+        foreach ($usersToTry as $user) {
+            foreach ($passwordsToTry as $pass) {
+                try {
+                    $dsn = "mysql:host=" . $host . ";port=" . DB_PORT . ";dbname=" . DB_NAME . ";charset=utf8mb4";
+                    $options = [
+                        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                        PDO::ATTR_EMULATE_PREPARES => false,
+                        PDO::ATTR_TIMEOUT => 3, // Prevent hanging on unreachable remote IP
+                        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci",
+                    ];
+                    $pdo = new PDO($dsn, $user, $pass, $options);
+                    initDatabaseSession($pdo);
+                    return $pdo;
+                } catch (PDOException $e) {
+                    // If the database doesn't exist yet, attempt to create it (local environments)
+                    if ($e->getCode() == 1049 || strpos($e->getMessage(), 'Unknown database') !== false) {
+                        try {
+                            $rootDsn = "mysql:host=" . $host . ";port=" . DB_PORT . ";charset=utf8mb4";
+                            $rootPdo = new PDO($rootDsn, $user, $pass, [PDO::ATTR_TIMEOUT => 3]);
+                            $rootPdo->exec("CREATE DATABASE IF NOT EXISTS `" . DB_NAME . "` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;");
+                            
+                            // Reconnect to newly created database
+                            $pdo = new PDO($dsn, $user, $pass, $options);
+                            initDatabaseSession($pdo);
+                            return $pdo;
+                        } catch (Exception $createEx) {
+                            // Fall through
+                        }
                     }
+                    // If credentials failed, try next combination
+                    continue;
                 }
-                // If credentials failed, try next combination
-                continue;
             }
         }
     }
