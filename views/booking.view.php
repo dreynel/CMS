@@ -1401,6 +1401,10 @@ function updateScheduledPrepPreview() {
     previewEl.textContent = `at ${fmt(prepDate)} (15 minutes before your ${fmt(arrDate)} arrival)`;
 }
 
+function handleArrivalChange() {
+    updateScheduledPrepPreview();
+}
+
 async function lookupExistingCustomerBooking(e) {
     e.preventDefault();
     const q = (document.getElementById('existingBookingLookupInput')?.value || '').trim();

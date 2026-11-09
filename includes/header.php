@@ -18,11 +18,9 @@ if (!isset($bodyClass)) {
     $bodyClass = 'bg-light text-dark';
 }
 
-$scriptDir = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '')), '/');
-$appBasePath = ($scriptDir === '' || $scriptDir === '.') ? '/' : $scriptDir . '/';
-$scriptName = str_replace('\\', '/', $_SERVER['SCRIPT_NAME'] ?? '');
-$scriptDir = rtrim(dirname($scriptName), '/.');
-$appBasePath = ($scriptDir === '' || $scriptDir === '/') ? '/' : $scriptDir . '/';
+$rawScriptDir = dirname($_SERVER['SCRIPT_NAME'] ?? '');
+$cleanScriptDir = trim(str_replace('\\', '/', $rawScriptDir), '/.');
+$appBasePath = ($cleanScriptDir === '' || $cleanScriptDir === '.') ? '/' : '/' . $cleanScriptDir . '/';
 $customCssFile = __DIR__ . '/../assets/css/bootstrap-custom.css';
 $customCssVer = is_file($customCssFile) ? (string)filemtime($customCssFile) : '2';
 ?>
