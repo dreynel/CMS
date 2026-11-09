@@ -20,11 +20,17 @@ if (
     && ($_SERVER['REQUEST_METHOD'] ?? '') === 'POST'
     && isset($_POST['__hostinger_db_setup'])
 ) {
-    $hHost = trim($_POST['db_host'] ?? 'localhost') ?: '194.59.164.63';
+    // $hHost = trim($_POST['db_host'] ?? 'localhost') ?: '194.59.164.63';
+    // $hPort = trim($_POST['db_port'] ?? '3306') ?: '3306';
+    // $hName = trim($_POST['db_name'] ?? 'u534933225_cms');
+    // $hUser = trim($_POST['db_user'] ?? 'u534933225_cms');
+    // $hPass = (string)($_POST['db_pass'] ?? 'Qx51>Ww?1g');
+
+    $hHost = trim($_POST['db_host'] ?? 'localhost') ?: '127.0.0.1';
     $hPort = trim($_POST['db_port'] ?? '3306') ?: '3306';
     $hName = trim($_POST['db_name'] ?? 'u534933225_cms');
-    $hUser = trim($_POST['db_user'] ?? 'u534933225_cms');
-    $hPass = (string)($_POST['db_pass'] ?? 'Qx51>Ww?1g');
+    $hUser = trim($_POST['db_user'] ?? 'root');
+    $hPass = (string)($_POST['db_pass'] ?? '007622');
 
     if ($hName !== '' && $hUser !== '') {
         $credContent = "<?php\n"

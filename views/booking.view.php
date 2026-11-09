@@ -1432,7 +1432,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Submit Reservation
 async function submitReservation(e) {
-    e.preventDefault();
+    if (e && e.preventDefault) e.preventDefault();
 
     if (!selectedTable) {
         showToast('Please select a table from the floor map first!', 'warning');
@@ -1544,7 +1544,8 @@ window.filterZone = filterZone;
 window.selectTable = selectTable;
 window.checkTableAvailability = checkTableAvailability;
 window.handleArrivalChange = handleArrivalChange;
-window.handleReservationSubmit = handleReservationSubmit;
+window.submitReservation = submitReservation;
+window.handleReservationSubmit = submitReservation;
 window.openMenuSpecialsModal = openMenuSpecialsModal;
 window.searchModalMenu = searchModalMenu;
 window.clearModalSearch = clearModalSearch;
