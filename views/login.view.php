@@ -95,18 +95,18 @@ function renderUserRoleBadge($role) {
                     <form id="systemLoginForm" onsubmit="handleUnifiedLogin(event)" method="POST" autocomplete="on">
                         <input type="hidden" id="redirectTarget" value="<?= $requestedRedirect ?>">
                         
-                        <!-- Email Input -->
+                        <!-- Username or Email Input -->
                         <div class="mb-3">
-                            <label for="loginEmail" class="form-label small fw-bold text-secondary">Account Email</label>
+                            <label for="loginIdentifier" class="form-label small fw-bold text-secondary">Username or Email</label>
                             <div class="input-group">
                                 <span class="input-group-text bg-light border-end-0 rounded-start-pill ps-3 text-muted">
-                                    <i class="bi bi-envelope-fill text-navy"></i>
+                                    <i class="bi bi-person-fill text-navy"></i>
                                 </span>
-                                <input type="email" 
-                                       id="loginEmail" 
-                                       name="email" 
+                                <input type="text" 
+                                       id="loginIdentifier" 
+                                       name="identifier" 
                                        class="form-control border-start-0 rounded-end-pill py-2.5 pe-3" 
-                                       placeholder="e.g. admin@raedens.com or staff@raedens.com" 
+                                       placeholder="e.g. admin, cashier, barista, staff, or email" 
                                        autocomplete="username" 
                                        spellcheck="false" 
                                        required>
@@ -117,7 +117,7 @@ function renderUserRoleBadge($role) {
                         <div class="mb-4">
                             <div class="d-flex justify-content-between align-items-center mb-1">
                                 <label for="loginPassword" class="form-label small fw-bold text-secondary mb-0">Password</label>
-                                <span class="text-muted" style="font-size: 0.72rem;">Default demo: <code>password</code></span>
+                                <span class="text-muted" style="font-size: 0.72rem;">Demo defaults: <code>admin123</code> or <code>password</code></span>
                             </div>
                             <div class="input-group">
                                 <span class="input-group-text bg-light border-end-0 rounded-start-pill ps-3 text-muted">
@@ -298,19 +298,38 @@ function showRoleMatchModal(user, redirectUrl) {
             customClass: { popup: 'rounded-4 shadow-lg border-0' }
         });
     } else {
-        showToast(`Authenticated as ${user.name} (${roleMeta.title})`, 'success');
+        safeToast(`Authenticated as ${user.name} (${roleMeta.title})`, 'success');
     }
 
     setTimeout(() => {
         window.location.href = redirectUrl;
-    }, 1400);
+    }, 1200);
+}
+
+// Resilient toast caller
+function safeToast(msg, type = 'info') {
+    if (typeof showToast === 'function') {
+        showToast(msg, type);
+    } else if (typeof Swal !== 'undefined') {
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: (type === 'danger' || type === 'error') ? 'error' : (type === 'success' ? 'success' : 'info'),
+            title: msg,
+            showConfirmButton: false,
+            timer: 3000
+        });
+    } else {
+        console.log(`[${type}] ${msg}`);
+    }
 }
 
 // Handle Universal Form Login Submission
 async function handleUnifiedLogin(e) {
     e.preventDefault();
     const btn = document.getElementById('btnSubmitLogin');
-    const email = document.getElementById('loginEmail').value.trim();
+    const idInput = document.getElementById('loginIdentifier') || document.getElementById('loginEmail');
+    const identifier = idInput ? idInput.value.trim() : '';
     const password = document.getElementById('loginPassword').value;
     const redirect = document.getElementById('redirectTarget').value;
 
@@ -321,19 +340,19 @@ async function handleUnifiedLogin(e) {
         const res = await fetch('api/auth.php?action=login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password, redirect })
+            body: JSON.stringify({ identifier, email: identifier, username: identifier, password, redirect })
         });
         const data = await res.json();
 
         if (data.success && data.user) {
             showRoleMatchModal(data.user, data.redirect);
         } else {
-            showToast(data.message || 'Authentication failed. Please verify credentials.', 'danger');
+            safeToast(data.message || 'Authentication failed. Please verify credentials.', 'danger');
             btn.disabled = false;
             btn.innerHTML = `<i class="bi bi-box-arrow-in-right me-2"></i> Sign In to System`;
         }
     } catch (err) {
-        showToast('Network error while connecting to authentication service.', 'danger');
+        safeToast('Network error while connecting to authentication service.', 'danger');
         btn.disabled = false;
         btn.innerHTML = `<i class="bi bi-box-arrow-in-right me-2"></i> Sign In to System`;
     }
@@ -342,7 +361,14 @@ async function handleUnifiedLogin(e) {
 // Quick 1-Click Demo Account Login
 async function quickLoginRole(role) {
     const redirect = document.getElementById('redirectTarget').value;
-    showToast(`Authenticating demo ${role.toUpperCase()} account...`, 'info');
+    
+    // Auto-populate form fields so user visually sees the credentials
+    const idInput = document.getElementById('loginIdentifier') || document.getElementById('loginEmail');
+    if (idInput) idInput.value = role;
+    const passInput = document.getElementById('loginPassword');
+    if (passInput) passInput.value = role + '123';
+
+    safeToast(`Authenticating demo ${role.toUpperCase()} account...`, 'info');
 
     try {
         const res = await fetch('api/auth.php?action=quick_login', {
@@ -355,10 +381,10 @@ async function quickLoginRole(role) {
         if (data.success && data.user) {
             showRoleMatchModal(data.user, data.redirect);
         } else {
-            showToast(data.message || 'Quick login failed.', 'danger');
+            safeToast(data.message || 'Quick login failed.', 'danger');
         }
     } catch (err) {
-        showToast('Network error during quick authentication.', 'danger');
+        safeToast('Network error during quick authentication.', 'danger');
     }
 }
 
@@ -371,7 +397,7 @@ async function handleStaffLogout() {
         });
         const data = await res.json();
         if (data.success) {
-            showToast('Signed out successfully.', 'info');
+            safeToast('Signed out successfully.', 'info');
         }
         setTimeout(() => {
             window.location.href = 'login';
