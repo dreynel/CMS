@@ -167,6 +167,7 @@ CREATE TABLE `inventory_items` (
   `item_type` enum('raw','finished') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'raw' COMMENT 'raw = ingredient / raw material, finished = sellable product',
   `unit` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pc',
   `product_id` bigint unsigned DEFAULT NULL COMMENT 'Linked POS product (finished items only)',
+  `image_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Optional item photo/thumbnail path',
   `unit_cost` decimal(12,4) NOT NULL DEFAULT '0.0000',
   `reorder_level` decimal(14,4) NOT NULL DEFAULT '0.0000',
   `current_stock` decimal(14,4) NOT NULL DEFAULT '0.0000' COMMENT 'Cached running balance (mirrors ledger)',
@@ -185,7 +186,7 @@ CREATE TABLE `inventory_items` (
 
 LOCK TABLES `inventory_items` WRITE;
 /*!40000 ALTER TABLE `inventory_items` DISABLE KEYS */;
-INSERT INTO `inventory_items` VALUES (1,'SKU-BF-001','Burger and Fries','finished','pc',1,55.0000,10.0000,0.0000,1,'2026-10-24 02:52:00','2026-10-24 02:52:00'),(2,'RM-PATTY','Patty','raw','pc',NULL,35.0000,10.0000,0.0000,1,'2026-10-24 02:52:00','2026-10-24 02:52:00'),(3,'RM-FRIES','Fries','raw','pc',NULL,20.0000,10.0000,0.0000,1,'2026-10-24 02:52:00','2026-10-24 02:52:00');
+INSERT INTO `inventory_items` VALUES (1,'SKU-BF-001','Burger and Fries','finished','pc',1,NULL,55.0000,10.0000,0.0000,1,'2026-10-24 02:52:00','2026-10-24 02:52:00'),(2,'RM-PATTY','Patty','raw','pc',NULL,NULL,35.0000,10.0000,0.0000,1,'2026-10-24 02:52:00','2026-10-24 02:52:00'),(3,'RM-FRIES','Fries','raw','pc',NULL,NULL,20.0000,10.0000,0.0000,1,'2026-10-24 02:52:00','2026-10-24 02:52:00');
 /*!40000 ALTER TABLE `inventory_items` ENABLE KEYS */;
 UNLOCK TABLES;
 

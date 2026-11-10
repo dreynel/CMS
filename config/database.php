@@ -93,6 +93,19 @@ function initDatabaseSession(PDO $pdo): void {
     } catch (Exception $e) {
         // Ignore auto-import errors
     }
+
+    // Auto-migration safeguard: Ensure inventory_items has `image_url` for upload image feature
+    try {
+        $hasInv = $pdo->query("SHOW TABLES LIKE 'inventory_items'")->fetchColumn();
+        if ($hasInv) {
+            $hasCol = $pdo->query("SHOW COLUMNS FROM `inventory_items` LIKE 'image_url'")->fetchColumn();
+            if (!$hasCol) {
+                $pdo->exec("ALTER TABLE `inventory_items` ADD COLUMN `image_url` VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL AFTER `product_id`");
+            }
+        }
+    } catch (Exception $e) {
+        // Ignore column check errors
+    }
 }
 
 /**
