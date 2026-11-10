@@ -30,7 +30,7 @@ if (
     $hPort = trim($_POST['db_port'] ?? '3306') ?: '3306';
     $hName = trim($_POST['db_name'] ?? 'u534933225_cms');
     $hUser = trim($_POST['db_user'] ?? 'root');
-    $hPass = (string)($_POST['db_pass'] ?? '007622');
+    $hPass = (string)($_POST['db_pass'] ?? '');
 
     if ($hName !== '' && $hUser !== '') {
         $credContent = "<?php\n"
@@ -45,13 +45,23 @@ if (
     }
 }
 
-// Hostinger / Production Configuration
-// If on Hostinger, replace with your Hostinger MySQL details from cPanel/hPanel (or use the web prompt):
-if (!defined('DB_HOST')) define('DB_HOST', getenv('DB_HOST') ?: '194.59.164.63');
+// -----------------------------------------------------------------------------
+// Hostinger / Remote Server Configuration (Expired / Disabled for Local Dev)
+// -----------------------------------------------------------------------------
+// if (!defined('DB_HOST')) define('DB_HOST', getenv('DB_HOST') ?: '194.59.164.63');
+// if (!defined('DB_PORT')) define('DB_PORT', getenv('DB_PORT') ?: '3306');
+// if (!defined('DB_NAME')) define('DB_NAME', getenv('DB_DATABASE') ?: 'u534933225_cms');
+// if (!defined('DB_USER')) define('DB_USER', getenv('DB_USERNAME') ?: 'u534933225_cms');
+// if (!defined('DB_PASS')) define('DB_PASS', getenv('DB_PASSWORD') !== false ? getenv('DB_PASSWORD') : 'Qx51>Ww?1g');
+
+// -----------------------------------------------------------------------------
+// Local Development Configuration (Standalone MySQL 8.0 / XAMPP / MariaDB)
+// -----------------------------------------------------------------------------
+if (!defined('DB_HOST')) define('DB_HOST', getenv('DB_HOST') ?: '127.0.0.1');
 if (!defined('DB_PORT')) define('DB_PORT', getenv('DB_PORT') ?: '3306');
 if (!defined('DB_NAME')) define('DB_NAME', getenv('DB_DATABASE') ?: 'u534933225_cms');
-if (!defined('DB_USER')) define('DB_USER', getenv('DB_USERNAME') ?: 'u534933225_cms');
-if (!defined('DB_PASS')) define('DB_PASS', getenv('DB_PASSWORD') !== false ? getenv('DB_PASSWORD') : 'Qx51>Ww?1g');
+if (!defined('DB_USER')) define('DB_USER', getenv('DB_USERNAME') ?: 'root');
+if (!defined('DB_PASS')) define('DB_PASS', getenv('DB_PASSWORD') !== false ? getenv('DB_PASSWORD') : '');
 
 /**
  * Initialize session timezone, SQL mode, and auto-import schema if database is empty.
@@ -98,7 +108,7 @@ function getDB() {
         return $pdo;
     }
 
-    $hostsToTry = array_unique([DB_HOST, 'localhost', '127.0.0.1']);
+    $hostsToTry = array_unique([DB_HOST, '127.0.0.1', 'localhost']);
     $usersToTry = array_unique([DB_USER, 'root']);
     $passwordsToTry = array_unique([DB_PASS, '']); // Try configured password first, then blank password for standard XAMPP
 
